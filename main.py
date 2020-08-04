@@ -1,1 +1,1 @@
-from BotClient import client
+import client
