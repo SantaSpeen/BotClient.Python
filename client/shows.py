@@ -8,5 +8,6 @@ def error(text):
 def info(text):
     messagebox.showinfo("Уведомление!", text)
 
+
 def yesno(text, title="Выбери"):
-    messagebox.askyesno(title, text)
+    return messagebox.askyesno(title, text)

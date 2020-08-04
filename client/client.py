@@ -1,34 +1,43 @@
 from tkinter import *
 from tkinter import ttk
 
-from .bar_menu import selector
-
 from .tab0 import job
 from .tab1 import stattistics
-# from .tab2 import settings
 
-host: str
-token: str
+from .bar_menu import BarMenu
 
-window = Tk()
-window.title("Клиент состояния бота.")
-window.geometry('750x445')
+root = Tk()  # Основной класс
+root.title("Клиент состояния бота.")  # Задаём название для окна
+
+# Выставляем стандартное разрешение окна
+root.geometry('740x480')  # linux
+# window.geometry('750x445')  # Windows
 
 # Работа с вкладками
-tab_control = ttk.Notebook(window)
+tab_control = ttk.Notebook(root)
+tab_control.pack(expand=1, fill='both')  # Пакуем
+
+# Создаём фреймы для работы с вкладками
 tab0 = ttk.Frame(tab_control)
 tab1 = ttk.Frame(tab_control)
 
-tab_control.add(tab0, text='Работа')
-job(tab0).create()
+# Создаём вклаку "Работа"
+tab_control.add(tab0, text='Работа')  # Добовляем вкладку в ttk.Notebook
+job(tab0).create()  # Отрисовываем вкладку
 
-tab_control.add(tab1, text='Статистика')
-stattistics(tab1).create()
+# Создаём вклаку "Статистика"
+tab_control.add(tab1, text='Статистика')  # Добовляем вкладку в ttk.Notebook
+stattistics(tab1).create()  # Отрисовываем вкладку
 
 # Вверхнее меню
-bar_menu = Menu(window)
-window.config(menu=bar_menu)
-selector(bar_menu, tab_control).create(window)
+bar_menu = Menu(root)  # Материнский класс меню
+root.config(menu=bar_menu)  # Добавляем в основной класс
+BarMenu(bar_menu, tab_control).create(root)  # Отрисовываем
 
-tab_control.pack(expand=1, fill='both')
-window.mainloop()
+
+def start():
+    root.mainloop()
+
+
+if __name__ == '__main__':
+    start()

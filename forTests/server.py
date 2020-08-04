@@ -6,6 +6,7 @@ app = Flask("Bot")
 
 admins = [45634563, 453455, 312321]
 
+
 @app.route("/api/<path:method>")
 def api(method):
     r = {"response": {}}
@@ -19,8 +20,10 @@ def api(method):
         r = {"error": {"code": 1, "msg": "Api method not found"}}
     return jsonify(r)
 
+
 def start(port):
     app.run("127.0.0.1", port)
+
 
 if __name__ == '__main__':
     start(3)

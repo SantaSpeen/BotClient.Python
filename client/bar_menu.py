@@ -1,13 +1,13 @@
-from tkinter import Menu, Button, Pack, ttk
+from tkinter import Menu, ttk
 from tkinter.dialog import Dialog
 from tkinter.simpledialog import askstring
 
-from .shows import yesno
+from . import shows
 
 from .tab_settings import settings
 
 
-class selector:
+class BarMenu:
 
     def __init__(self, menu, tabs):
         self.menu = menu
@@ -23,13 +23,8 @@ class selector:
 
     @classmethod
     def about(cls):
-        yesno("Версия: 0.7.1\nБилд: 154-Beta\nРазраб: Максим Хомутов", "О клиенте")
-
-    def hide_show(self, widget):
-        if widget.winfo_viewable():
-            widget.grid_remove()
-        else:
-            widget.grid()
+        if not shows.yesno("Версия: 0.7.1\nБилд: 161-Beta\nРазраб: Максим Хомутов", "О клиенте"):
+            shows.error("ВСМЫсЛЕ НЕТ?!\nА по лбу?")
 
     def settings(self):
         tab = ttk.Frame(self.tabs)

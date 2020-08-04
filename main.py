@@ -1,1 +1,3 @@
 import client
+
+client.start()
