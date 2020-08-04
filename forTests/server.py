@@ -7,6 +7,7 @@ app = Flask("Bot")
 admins = [45634563, 453455, 312321]
 
 
+# TODO: Сделаить норльный сервер
 @app.route("/api/<path:method>")
 def api(method):
     r = {"response": {}}
@@ -25,5 +26,6 @@ def start(port):
     app.run("127.0.0.1", port)
 
 
+# TODO: Сделать генерацию порта...
 if __name__ == '__main__':
     start(3)

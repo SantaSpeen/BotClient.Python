@@ -3,7 +3,7 @@ import traceback
 import requests
 
 from . import shows
-from .config import open_config
+from .json_access import open_config
 
 
 def request(method, args: dict = {}) -> dict:
@@ -12,13 +12,13 @@ def request(method, args: dict = {}) -> dict:
         r = requests.get(
             "http://" + config["host"] + ":" + config["port"] + "/api/" + method + "?code=" + config["code"],
             params=args).json()
-        if r.get("error"):
-            shows.error("Что-то не так в запросе: " + r["error"]["msg"])
     except Exception as e:
         to_print = traceback.format_exc()
         print(to_print)
         shows.error("Соболезную, но у тебя ошибка:\n"+str(e))
-        r = {}
+        r = {"error": {"msg": "Ошибка скрипта.."}}
+    if r.get("error"):
+        shows.error("Что-то не так в запросе: " + r["error"]["msg"])
     return r
 
 

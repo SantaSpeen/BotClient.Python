@@ -3,6 +3,7 @@ from tkinter.dialog import Dialog
 from tkinter.simpledialog import askstring
 
 from . import shows
+from .json_access import open_global_vars, save_global_vars
 
 from .tab_settings import settings
 
@@ -23,20 +24,27 @@ class BarMenu:
 
     @classmethod
     def about(cls):
-        if not shows.yesno("Версия: 0.7.1\nБилд: 161-Beta\nРазраб: Максим Хомутов", "О клиенте"):
+        if not shows.yesno("Версия: 0.7.3\nБилд: 167\nСтатус: Beta\nРазраб: Максим Хомутов", "О клиенте"):
             shows.error("ВСМЫсЛЕ НЕТ?!\nА по лбу?")
 
     def settings(self):
-        tab = ttk.Frame(self.tabs)
-        self.tabs.add(tab, text='Настройки')
-        settings(tab).create()
+        if not open_global_vars()["setting_open"]:
+            save_global_vars(setting_open=True)
+            tab = ttk.Frame(self.tabs)  # Создаём фрейм для вкладки "Настройки"
+            self.tabs.add(tab, text='Настройки')
+            settings(tab).create()  # Создаём вкладкуы
+        else:
+            shows.info("Настройки уже открыты.")
 
+    # Функция отрисовки бар меню
     def create(self, window):
+        # Создаём каскад для меню - "Файл"
         file = Menu(self.menu, tearoff=0)
-        file.add_command(label="О клиенте", command=self.about)
-        file.add_command(label="Выход", command=window.quit)
-        self.menu.add_cascade(label="Файл", menu=file)
+        file.add_command(label="О клиенте", command=self.about)  # Добавляем пункт "О клиенте"
+        file.add_command(label="Выход", command=window.quit)  # Добавляем пункт "выход"
+        self.menu.add_cascade(label="Файл", menu=file)  # Добавляем наш каскад в основное меню
 
-        edit_menu = Menu(self.menu, tearoff=0)
-        edit_menu.add_command(label="Настройки", command=self.settings)
-        self.menu.add_cascade(label="Редактировать", menu=edit_menu)
+        # Создаём каскад для меню - "Редактировать"
+        edit = Menu(self.menu, tearoff=0)
+        edit.add_command(label="Настройки", command=self.settings)  # Добавляем пункт "Настройки"
+        self.menu.add_cascade(label="Редактировать", menu=edit)  # Добавляем наш каскад в основное меню

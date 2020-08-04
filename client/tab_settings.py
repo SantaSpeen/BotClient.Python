@@ -4,7 +4,7 @@ from tkinter import Button, Text, Frame, LEFT, END
 from tkinter.dialog import Dialog
 
 from . import shows
-from .config import open_config, save_config
+from .json_access import open_config, save_config, save_global_vars
 from .server_api import bot_getAdmins
 
 
@@ -25,6 +25,7 @@ class settings:
             self.read()
             self.tab.pack_forget()
             self.tab.destroy()
+            save_global_vars()
         except Exception as e:
             print(traceback.format_exc())
             shows.error(f"Проверь, чо ты там ввёл\n{e}")

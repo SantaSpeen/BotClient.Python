@@ -6,6 +6,9 @@ from .tab1 import stattistics
 
 from .bar_menu import BarMenu
 
+from .json_access import save_global_vars
+save_global_vars()  # Устанавливаем значения по умолчанию
+
 root = Tk()  # Основной класс
 root.title("Клиент состояния бота.")  # Задаём название для окна
 
@@ -30,6 +33,7 @@ tab_control.add(tab1, text='Статистика')  # Добовляем вкл�
 stattistics(tab1).create()  # Отрисовываем вкладку
 
 # Вверхнее меню
+# TODO: Добавить функционала
 bar_menu = Menu(root)  # Материнский класс меню
 root.config(menu=bar_menu)  # Добавляем в основной класс
 BarMenu(bar_menu, tab_control).create(root)  # Отрисовываем

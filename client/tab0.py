@@ -1,6 +1,6 @@
 from tkinter import Button, TOP, END, Text, Frame
 
-from .config import open_config
+from .json_access import open_config
 from .server_api import bot_isActive
 
 
