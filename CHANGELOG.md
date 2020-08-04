@@ -1,7 +1,7 @@
 # Лог изменений.
 ### Навигация:
 ##### {Версия} - {Билд}
-* [0.7.3 - 167](https://github.com/SantaSpeen/BotClient.Python/blob/master/CHANGELOG.md#[05.08.2020] 0.7.3)
+* [0.7.3 - 167](https://github.com/SantaSpeen/BotClient.Python/blob/master/CHANGELOG.md#05082020-073)
 
 #### [05.08.2020] 0.7.3 
 * Билд: 167
